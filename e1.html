@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+		$(document).ready(function(){
+			
+			
+			$(".custom-select").change(function () {
+				var x= document.getElementById("ToS").value;
+				if(x!=0){
+				alert(x);
+				$('#TTTT').show();
+				}
+				
+			})
+			
+		});
+		</script>
+	</head>
+	<body>
+		<select class="custom-select" id="ToS" onchange="FuncToS()" >
+			<option value="0">C</option>
+			<option value="1" >Import</option>
+			<option value="2">Export</option>
+		</select>
+		<select class="custom-select" id="TTTT" hidden="true">
+			<option selected>Choose...</option>
+			<option value="1">LCL</option>
+			<option value="2">FCL</option>
+			
+		</select>
+	</body>
+</html>
