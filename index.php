@@ -176,7 +176,7 @@
                 <!-- Example split button -->
                 <p />
                 <form method="post">
-                    Quantity: <input type="text" name="Quantity" value="" id="Quantity"><br>
+                    Quantity: <input  class="form-control" type="text" name="Quantity" value="" id="Quantity"><br>
 
                     <br>
                     <div class="input-group mb-3">
@@ -189,18 +189,20 @@
                         </select>
                     </div>
                 </form>
-                <form>
-                    weight: <input type="text" name="weight" value="" id="weight"></from>
-                    <form>
-                        height: <input type="text" name="height" value="" id="height"></from>
-                        <form>
-                            length: <input type="text" name="length" value="" id="length"></from>
-                            <form>
-                                width: <input type="text" name="width" value="" id="width"></from>
-
-                                <br><br>
-                                <p align="center"><input id="submit_cal" type="submit" value="Submit" name="submit"></p>
-
+                <form  class="form-inline">
+            
+                <div class="form-group mb-2">
+                    weight: <input type="text" class="form-control" name="weight" value="" id="weight"></from>
+                    
+                        height: <input type="text" class="form-control" name="height" value="" id="height"></from>
+                       
+                            length: <input type="text" class="form-control" name="length" value="" id="length"></from>
+                         
+                                width: <input type="text" class="form-control" name="width" value="" id="width"></from>
+                                </div> 
+                           
+                                <p ><input id="submit_cal" type="submit" value="คำนวณ" name="submit"></p>
+                                </div>
                             </form>
             </div>
         </div>
@@ -208,12 +210,11 @@
         </div>
         <div class="control-group" align="center">
             <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                Quantity: <input type="text" name="Quantity" value="" id="Quantity2">
+                <!-- Quantity: <input type="text" name="Quantity" value="" id="Quantity2"> -->
                 Price: <input type="text" name="Price" value="" id="Price">
                 <p class="help-block text-danger"></p>
             </div>
-            <br><br>
-            <p align="center"><input id="submit_member" type="submit" value="Submit" name="submit"></p>
+       
         </div>
         <div cbotron">
 
@@ -248,7 +249,7 @@
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Name</label>
-                                    <input class="form-control" id="name" type="text" placeholder="Name"
+                                    <input class="form-control" name="name" type="text" placeholder="Name"
                                         required="required" data-validation-required-message="Please enter your name.">
                                     <p class="help-block text-danger"></p>
                                 </div>
@@ -256,7 +257,7 @@
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Email Address</label>
-                                    <input class="form-control" id="email" type="email" placeholder="Email Address"
+                                    <input class="form-control" name="email" type="email" placeholder="Email Address"
                                         required="required"
                                         data-validation-required-message="Please enter your email address.">
                                     <p class="help-block text-danger"></p>
@@ -265,7 +266,7 @@
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Phone Number</label>
-                                    <input class="form-control" id="phone" type="tel" placeholder="Phone Number"
+                                    <input class="form-control" name="phone" type="tel" placeholder="Phone Number"
                                         required="required"
                                         data-validation-required-message="Please enter your phone number.">
                                     <p class="help-block text-danger"></p>
@@ -274,6 +275,9 @@
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Message</label>
+                                    <input class="form-control" name="message" type="text" placeholder="message"
+                                        required="required"
+                                        data-validation-required-message="Please enter your phone number.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>

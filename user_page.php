@@ -199,7 +199,7 @@ $row=mysqli_fetch_assoc($result);
                         </div>
                         <ul class="list-group list-group-flush">
                             <a class="list-group-item" href="#" id="profile">Profile</a>
-                            <a class="list-group-item" href="#">Booking</a>
+                            <a class="list-group-item" href="#" id="booking">Booking</a>
                             <a class="list-group-item" href="#" id="status">Status</a>
                             <a class="list-group-item" href="#" id="bill">Bill</a>
                         </ul>
@@ -283,6 +283,17 @@ $row=mysqli_fetch_assoc($result);
                         </div>
                         </form>
 
+                        
+                        <!-- ส่งไฟล์ให้ admin -->
+                        <div id="booking_form" class="padding">
+                            <form action="send_booking.php?username=<?php echo $username?>" method="POST" enctype="multipart/form-data" >
+                                <label >ส่งใบ Booking ให้ Admin</label>
+                                <input type="file" class="form-control-file" name="booking" >
+                                <br>
+                                <button type="submit" class="btn btn-primary" >ส่งไฟล์</button>
+                        </div>
+                        </form>
+
                         <!-- แสดงสถานะ -->
                         <div id="status_form" class="padding">
 
@@ -308,6 +319,7 @@ $row=mysqli_fetch_assoc($result);
                 <script>
                 $(document).ready(function() {
                     // $("#profile").hide();
+                    $("#booking_form").hide();
                     $("#status_form").hide();
                     $("#bill_form").hide();
                     $("#bill").click(function() {
@@ -324,6 +336,13 @@ $row=mysqli_fetch_assoc($result);
                         $("#profile_form").hide();
                         $("#bill_form").hide();
                         $("#status_form").fadeIn();
+                    });
+
+                    $("#booking").click(function() {
+                        $("#profile_form").hide();
+                        $("#bill_form").hide();
+                        $("#status_form").hide();
+                        $("#booking_form").fadeIn();
                     });
 
 

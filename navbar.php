@@ -163,7 +163,7 @@
 
                  <li class="nav-item mx-0 mx-lg-1">
                      <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal"
-                         data-target="#RegisterModal" href="#">Member</a>
+                         data-target="#RegisterModal" href="#">Register</a>
                  </li>
 
 
