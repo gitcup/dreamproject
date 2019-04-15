@@ -19,6 +19,7 @@ if ($conn->query($sql) === TRUE) {
     echo '<script type="text/javascript">';
     echo 'setTimeout(function () 
     { swal("UPDATE SUCCESS!","STATUS HAS BEEN CHANGE","success");}, 1000);</script>';
+    // echo $sql;
    
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;

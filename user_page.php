@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
- 
+
 
     <!-- Custom fonts for this template -->
     <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,7 +27,7 @@
     <!-- Custom styles for this template -->
     <link href="css/freelancer.min.css" rel="stylesheet">
     <link href="css/dis.css" rel="stylesheet">
-   <link href="css/step-process.css" rel="stylesheet">
+    <link href="css/step-process.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script>
@@ -245,73 +245,179 @@ $row=mysqli_fetch_assoc($result);
                             </ul>
                         </div>
 
-                        <!-- สถานะ -->
-                        <!-- <div id="status" class="padding">
-                            <form>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">จัดเตรียสมเอกสาร</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">แจก D/O</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Custom Famality</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">สินค้าถึงท่าเรือ</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label"
-                                        for="exampleCheck1">รถบรรทุกนำาินค้าเข้าโรงงาน</label>
-                                </div>
 
-                            </form>
-                        </div> -->
+                        <?php
+                                    include('connect.php');
+                  $query = "SELECT * FROM booking_file 
+                 WHERE username ='$username' ";
+
+                  
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
 
 
+?>
 
                         <!-- ส่งไฟล์ให้ admin -->
                         <div id="bill_form" class="padding">
                             <form>
                                 <label for="exampleFormControlFile1">ส่งใบข้อมูลให้ Admin</label>
                                 <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            </form>
                         </div>
-                        </form>
 
-                        
+
+
                         <!-- ส่งไฟล์ให้ admin -->
                         <div id="booking_form" class="padding">
-                            <form action="send_booking.php?username=<?php echo $username?>" method="POST" enctype="multipart/form-data" >
-                                <label >ส่งใบ Booking ให้ Admin</label>
-                                <input type="file" class="form-control-file" name="booking" >
-                                <br>
-                                <button type="submit" class="btn btn-primary" >ส่งไฟล์</button>
+
+                            <?php
+if ($row['status']=="") {
+    echo ' 
+    <form action="send_booking.php?username='.$username.'" method="POST"
+        enctype="multipart/form-data">
+        <label>ส่งใบ Booking ให้ Admin</label>
+        <input type="file" class="form-control-file" name="booking">
+        <br>
+        <button type="submit" class="btn btn-primary">ส่งไฟล์</button>
+</div>
+</form>';
+}
+
+if ($row['status']=="Receive form shipper") {
+
+    
+    $query = "SELECT * FROM booking_detail
+    INNER JOIN member on booking_detail.username=member.username
+   WHERE member.username ='$username' ";
+
+    
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+
+    echo '
+    <a class="btn btn-primary" href="mpdf/booking_confirm.php?username='.$username.'">Print</a><br><br><br>
+
+
+    <div style="text-align: center">
+<h3>BOOKING CONFIRM</h3>
+</div>
+<p>TO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : '.$row['company_name'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date : </p> 
+<p>ATTTN : '.$row['firstname'].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$row['lastname'].'</p> 
+<p>FROM : JNS </p> 
+<br>
+<small> PLEASE FIND BELOW OUR BOOKING CONFIRMATION WITH DETAILS OF SAILING SCHEDULE FROM    TO     AND OTHER NECESSARY INFORMATION AS FOLLOW : - </small>
+<br><br>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td scope="col">BOOKING NO. : <strong>'.$row['booking_id'].'</strong><br>SHIPPING NAME : <strong>'.$row['name'].'</strong></th>
+        <td scope="col">REFERENCE NO .: <br>CUST. REFERENCE NO . : </th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">PORT OF LOADING : <strong>'.$row['port_of_load'].'</strong><br>PORT OF DISCHARGE : <strong>'.$row['port_of_discharge'].'</strong><br>PORT OF DELIVERY : <strong>'.$row['post_deli'].'</strong> </th>
+        <td>ETD: <strong>'.$row['etd'].'</strong>  <br> ETA : <strong>'.$row['eta'].'</strong> <br>ETA: <strong>'.$row['eta_2'].'</strong> </th>
+       
+      </tr>
+      <tr>
+        <td scope="row">FEEDER VESSEL : <strong>'.$row['feeder_vessel'].'</strong>   <br> MOTHER VESSEL : <strong>'.$row['mother_vessel'].'</strong>  </th>
+        <td>FEEDER VOYAGE : <strong>'.$row['feeder_voyage'].'</strong>   <br> MOTHER VOYAGE : <strong>'.$row['mother_voyage'].'</strong>  <br></th>
+      
+      </tr>	
+      <tr>
+        <td scope="row">WEIGHT : <strong>'.$row['weight'].'</strong>  <br> QUANTITY :<strong>'.$row['quantity'].'</strong>  </th>
+        <td scope="row">VOLUME : <strong>'.$row['quantity_volume'].'</strong> </th>
+      
+      </tr>
+      <tr>
+      <td scope="row">LOADING AT :  <strong>'.$row['load_at'].'</strong> <br> LOADING DATE : <strong>'.$row['load_date'].'</strong>  <br><br> CONTACT : <strong>'.$row['contact'].'</strong> <br> TEL : <br> CLOSING DATE : <strong>'.$row['closing_date'].'</strong>   </th>
+      <td scope="row">TRANSPORTER : <strong>'.$row['transporter'].'</strong> <br> TEL :  <strong>'.$row['transporter_tel'].'</strong> <br><br> SHIPPING CONTACT :  <strong>'.$row['shiping_contact'].'</strong><br> TEL : <strong>'.$row['tel_shiping'].'</strong> <br> TIME :  <strong>'.$row['time'].'</strong>  </th>
+    </tr>
+   
+    <tr>
+    <td colspan="2">NO. OF CONTAINER/SIZE/TYPE : <strong>'.$row['type'].'</strong></th>
+    </tr>
+    <tr>
+    <td colspan="2">REMARK : 1 . PLS send shipping particular and invoice & packing list within <strong>'.$row['etd'].'</strong> <br>
+    2. PAPER Less Code : 0251 (PAT PORT)
+    </td>
+    </tr>
+    </tbody>
+  </table>';
+}
+?>
+
                         </div>
-                        </form>
+
+
+
+
+
+
+
+
 
                         <!-- แสดงสถานะ -->
                         <div id="status_form" class="padding">
+                            <label for="exampleFormControlFile1">Status</label>
 
-                            <label for="exampleFormControlFile1">สถานะ</label>
-                            <div class="container1">
-                                <ul class="progressbar1">
-                                    <li class="active">จัดเตรียสมเอกสาร</li>
-                                    <li>แจก D/O</li>
-                                    <li>Custom Famality</li>
-                                    <li>สินค้าถึงท่าเรือ</li>
-                                    <li>รถบรรทุกนำาินค้าเข้าโรงงาน</li>
-                                </ul>
+                           
+                                <?php
+    include('connect.php');
+    $query = "SELECT * FROM booking_file 
+   WHERE username ='$username' ";
+
+    
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+
+if ($row['status']=="") {
+    echo '<div class="alert alert-warning" role="alert">
+    Status will show when you sending booking first !
+  </div>';
+}
+
+
+if ($row['status']=="Receive form shipper") {
+    echo ' <div class="container1"><ul class="progressbar1">
+    <li class="active">Receive form shipper</li>
+    <li>Booking Confirm</li>
+    <li>Department</li>
+    <li>Arrival</li>
+</ul>';
+}
+if ($row['status']=="Booking Confirm") {
+    echo '   <div class="container1"><ul class="progressbar1">
+    <li class="active">Receive form shipper</li>
+    <li  class="active">Booking Confirm</li>
+    <li>Department</li>
+    <li>Arrival</li>
+</ul>';
+}
+if ($row['status']=="Department") {
+    echo '  <div class="container1"> <ul class="progressbar1">
+    <li class="active">Receive form shipper</li>
+    <li  class="active">Booking Confirm</li>
+    <li class="active">Department</li>
+    <li>Arrival</li>
+</ul>';
+}
+if ($row['status']=="Arrival") {
+    echo '  <div class="container1"> <ul class="progressbar1">
+    <li class="active">Receive form shipper</li>
+    <li  class="active">Booking Confirm</li>
+    <li  class="active">Department</li>
+    <li  class="active">Arrival</li>
+</ul>';
+}
+?>
                             </div>
-
                         </div>
 
-                    </div>
-                </div>
+               
 
 
 
@@ -323,16 +429,19 @@ $row=mysqli_fetch_assoc($result);
                     $("#status_form").hide();
                     $("#bill_form").hide();
                     $("#bill").click(function() {
+                        $("#booking_form").hide();
                         $("#profile_form").hide();
                         $("#status_form").hide();
                         $("#bill_form").fadeIn();
                     });
                     $("#profile").click(function() {
+                        $("#booking_form").hide();
                         $("#bill_form").hide();
                         $("#status_form").hide();
                         $("#profile_form").fadeIn();
                     });
                     $("#status").click(function() {
+                        $("#booking_form").hide();
                         $("#profile_form").hide();
                         $("#bill_form").hide();
                         $("#status_form").fadeIn();

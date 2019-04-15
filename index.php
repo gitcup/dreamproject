@@ -151,7 +151,7 @@
 
 <body id="page-top">
 
-   <?php include('navbar.php'); ?>
+    <?php include('navbar.php'); ?>
 
     <!-- Header -->
     <header class="masthead bg-primary text-white text-center">
@@ -176,7 +176,7 @@
                 <!-- Example split button -->
                 <p />
                 <form method="post">
-                    Quantity: <input  class="form-control" type="text" name="Quantity" value="" id="Quantity"><br>
+                    Quantity: <input class="form-control" type="text" name="Quantity" value="" id="Quantity"><br>
 
                     <br>
                     <div class="input-group mb-3">
@@ -189,22 +189,22 @@
                         </select>
                     </div>
                 </form>
-                <form  class="form-inline">
-            
-                <div class="form-group mb-2">
-                    weight: <input type="text" class="form-control" name="weight" value="" id="weight"></from>
-                    
+                <form class="form-inline">
+
+                    <div class="form-group mb-2">
+                        weight: <input type="text" class="form-control" name="weight" value="" id="weight"></from>
+
                         height: <input type="text" class="form-control" name="height" value="" id="height"></from>
-                       
-                            length: <input type="text" class="form-control" name="length" value="" id="length"></from>
-                         
-                                width: <input type="text" class="form-control" name="width" value="" id="width"></from>
-                                </div> 
-                           
-                                <p ><input id="submit_cal" type="submit" value="คำนวณ" name="submit"></p>
-                                </div>
-                            </form>
+
+                        length: <input type="text" class="form-control" name="length" value="" id="length"></from>
+
+                        width: <input type="text" class="form-control" name="width" value="" id="width"></from>
+                    </div>
+
+                    <p><input id="submit_cal" type="submit" value="คำนวณ" name="submit"></p>
             </div>
+            </form>
+        </div>
         </div>
 
         </div>
@@ -214,7 +214,7 @@
                 Price: <input type="text" name="Price" value="" id="Price">
                 <p class="help-block text-danger"></p>
             </div>
-       
+
         </div>
         <div cbotron">
 
@@ -369,61 +369,62 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    <form action="process\add_user.php" method="POST">
-                        <div class="form-inline">
+                        <form action="process\add_user.php" method="POST">
+                            <div class="form-inline">
 
-                            <label>username</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="username">
+                                <label>username</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="username">
+                                </div>
+
                             </div>
+                            <br>
+                            <div class="form-inline">
 
-                        </div>
-                        <br>
-                        <div class="form-inline">
+                                <label>password</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="password" name="password">
+                                </div>
 
-                            <label>password</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="password" name="password">
                             </div>
+                            <br>
+                            <div class="form-inline">
 
-                        </div>
-                        <br>
-                        <div class="form-inline">
+                                <label>ชื่อบริษัท</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" name="company_name">
+                                </div>
 
-                            <label>ชื่อบริษัท</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" name="company_name">
                             </div>
+                            <br>
+                            <div class="form-inline">
 
-                        </div>
-                        <br>
-                        <div class="form-inline">
+                                <label>ชื่อ-นามสกุล</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" placeholder="ชื่อ" name="name">
+                                    <input class="form-control" type="text" placeholder="นามสกุล" name="last_name">
+                                </div>
 
-                            <label>ชื่อ-นามสกุล</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="ชื่อ" name="name">
-                                <input class="form-control" type="text" placeholder="นามสกุล" name="last_name">
                             </div>
+                            <br>
+                            <div class="form-inline">
 
-                        </div>
-                        <br>
-                        <div class="form-inline">
+                                <label>ที่อยู่</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" placeholder="ที่อยู่ของบริษัท"
+                                        name="address">
+                                </div>
 
-                            <label>ที่อยู่</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" placeholder="ที่อยู่ของบริษัท" name="address">
                             </div>
+                            <br>
+                            <div class="form-inline">
 
-                        </div>
-                        <br>
-                        <div class="form-inline">
+                                <label>เบอร์โทร</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="number" name="phone_number">
+                                </div>
 
-                            <label>เบอร์โทร</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="number" name="phone_number">
                             </div>
-
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
@@ -449,50 +450,61 @@
                         </button>
                     </div>
                     <form action="process/login.php" method="POST">
-                    <div class="modal-body" style="text-align : center;">
-                        <div class="form-group ">
-                            <label for="exampleInputEmail1">Username</label>
-                            
-                            <input type="text" class="form-control" name="username">
-                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                                else.</small> -->
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" name="password">
-                        </div>
-                        <!-- <div class="form-group form-check">
+                        <div class="modal-body" style="text-align : center;">
+
+                            <div class="row">
+                                <div class="col-sm">
+
+                                </div>
+                                <div class="col-sm">
+                                    <label for="exampleInputEmail1">Username</label>
+
+                                    <input type="text" class="form-control" name="username">
+                                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+else.</small> -->
+
+
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                                <div class="col-sm">
+
+                                </div>
+
+                            </div>
+                            <br>
+                            <!-- <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div> -->
-                        <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
-                        </form>
-                        <br>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                            <!-- <button type="button" class="btn btn-primary">ลงทะเบียน</button> -->
-                        </div>
+                            <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
+                    </form>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                        <!-- <button type="button" class="btn btn-primary">ลงทะเบียน</button> -->
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <!-- Bootstrap core JavaScript -->
-            <script src="vendor/jquery/jquery.min.js"></script>
-            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Plugin JavaScript -->
-            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-            <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <!-- Plugin JavaScript -->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
-            <!-- Contact Form JavaScript -->
-            <script src="js/jqBootstrapValidation.js"></script>
-            <script src="js/contact_me.js"></script>
+        <!-- Contact Form JavaScript -->
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/contact_me.js"></script>
 
-            <!-- Custom scripts for this template -->
-            <script src="js/freelancer.min.js"></script>
+        <!-- Custom scripts for this template -->
+        <script src="js/freelancer.min.js"></script>
 
-            <script src="js/fr.js"></script>
+        <script src="js/fr.js"></script>
 
 </body>
 

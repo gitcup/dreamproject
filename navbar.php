@@ -49,12 +49,13 @@
                  <li class="nav-item mx-0 mx-lg-1">
                      <div class="dropdown">
                          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                             ยินดีต้อนรับ <?php echo $_SESSION["username"];  ?>
+                             Welcome <?php echo $_SESSION["username"];  ?>
                          </button>
                          <div class="dropdown-menu">
                              <!-- <a class="dropdown-item" href="#">Link 1</a>
       <a class="dropdown-item" href="#">Link 2</a> -->
-                             <a class="dropdown-item" href="process/logout.php">ออกจากระบบ</a>
+                             <a class="dropdown-item" href="user_page.php">Profile</a>
+                             <a class="dropdown-item" href="process/logout.php">Logout</a>
                              <!-- <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#">Another link</a>
     </div> -->
@@ -96,7 +97,7 @@
                  </li>
 
 
-<!-- 
+                 <!-- 
                  <li class="nav-item mx-0 mx-lg-1">
                      <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" data-toggle="modal"
                          data-target="#RegisterModal" href="#">Member</a>

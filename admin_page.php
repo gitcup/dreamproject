@@ -98,9 +98,9 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#" >
+                <a class="nav-link" href="admin_page.php" >
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Booking</span>
+                    <span>Admin page</span>
                 </a>
             </li>
             <li class="nav-item dropdown">
@@ -200,7 +200,7 @@ while($row = mysqli_fetch_assoc($result))
     <td>'.$row['company_name'].'</td>
     <td>'.$row['address'].'</td>
     <td>'.$row['phone_number'].'</td>
-    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">สถานะ</button></td>
+    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg'.$row['username'].'">สถานะ</button></td>
     <td><a href="booking/'.$row['username'].'/'.$row['path_file'].'" class="btn btn-success">Booking file</a>
     <a href="#" class="btn btn-success" id="booking" value="'.$row['username'].'" value2="'.$row['booking_id'].'">+ Add booking</a>
     </td>
@@ -208,7 +208,7 @@ while($row = mysqli_fetch_assoc($result))
 
 
 
-echo '<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+echo '<div class="modal fade bd-example-modal-lg'.$row['username'].'" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
   <div class="modal-header">
@@ -249,7 +249,7 @@ if ($row['status']=="Arrival") {
 echo'  <li  class="active"  >Receive form shipper</li>';
 echo'  <li class="active" >Booking Confirm</li>';
 echo'  <li class="active">Department</li>';
-echo'  <li class="active" >Department</li>';
+echo'  <li class="active" >Arrival</li>';
 
 } 
 echo'    </ul>
@@ -261,13 +261,16 @@ echo'    </ul>
 <br>
 <form action="process/update_status.php" method="POST">
 <input name="username" value="'.$row['username'].'" hidden>
-<select name="status_update"class="form-control">
+<select name="status_update" class="form-control">
 <option value="'.$row['status'].'">'.$row['status'].'</option>
-<option value="Receive form shipper">Receive form shipper</option>
+<option value="Receive form shipper" >Receive form shipper</option>
 <option value="Booking Confirm">Booking Confirm</option>
 <option value="Department">Department</option>
 <option value="Department">Department</option>
 </select>
+
+
+
 <br>
 <button class="btn btn-primary" type="submit">UPDATE</button>
 </form>
@@ -391,6 +394,11 @@ echo'    </ul>
             $("#booking_form").fadeOut();
         });
 
+        $("#list_country_truck").hide();
+        $("#show_country").click(function() {
+            $("#list_country_truck").fadeIn();
+           
+        });
 
 
     });
