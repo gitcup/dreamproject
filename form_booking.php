@@ -8,6 +8,8 @@
         <!-- Text input-->
         <div class="form-row">
 
+            <input id="username_get" name="username" type="text" value="" class="form-control input-md" hidden>
+            <!-- <input  name="booking_id" type="text" value="" class="form-control input-md" hidden> --> 
 
             <div class="col-md-3">
                 <label class="col-md-4 control-label" for="ship_name">SHIPPING NAME</label>
@@ -16,7 +18,7 @@
             </div>
             <div class="col-md-3">
                 <label class="col-md-4 control-label" for="ship_name">Booking NO.</label>
-                <input name="booking_no" type="text" placeholder="" class="form-control input-md">
+                <input name="booking_id" type="text" placeholder="" id="booking_id_get" class="form-control input-md" readonly>
 
             </div>
 
@@ -107,7 +109,7 @@
             </div>
 
             <div class="col-md-2">
-                <label class="col-md-3 control-label" >Unit</label>
+                <label class="col-md-3 control-label">Unit</label>
                 <select name="unit_volume" placeholder="" class="form-control input-md">
                     <!-- <option value="CBM">CBM</option> -->
                     <option value="CBM">CBM</option>
@@ -261,8 +263,10 @@
         </div>
 
     </fieldset>
-
-    <button class="btn btn-success" type="submit">SUBMIT</button>
+    <div class="col-md-3">
+        <button class="btn btn-success" type="submit">SUBMIT</button>
+    </div>
+    <br>
 </form>
 <!-- 
 <script>

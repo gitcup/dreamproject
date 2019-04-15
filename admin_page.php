@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
-
+    <link href="css/step-process.css" rel="stylesheet">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -98,9 +98,9 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="#" >
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+                    <span>Booking</span>
                 </a>
             </li>
             <li class="nav-item dropdown">
@@ -120,11 +120,11 @@
           <a class="dropdown-item" href="blank.html">Blank Page</a>
         </div> -->
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="booking" href="#">
+            <!-- <li class="nav-item">
+                <a class="nav-link"  href="#">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Booking Form</span></a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
@@ -180,26 +180,106 @@
 
                                     <?php
                                     include('connect.php');
-                  $query = "SELECT * FROM member INNER JOIN booking_file ON member.username=booking_file.username
-                   GROUP BY  member.username";
+                  $query = "SELECT * FROM member 
+                  INNER JOIN booking_file ON member.username=booking_file.username
+                 
+                   ";
 
-                  $result = mysqli_query($conn, $query);
-                   while($row = mysqli_fetch_assoc($result))
-                   {
-                      
-
-                       echo '<tr>
-                       <td>'.$row['username'].'</td>
-                       <td>'.$row['firstname'].'</td>
-                       <td>'.$row['lastname'].'</td>
-                       <td>'.$row['company_name'].'</td>
-                       <td>'.$row['address'].'</td>
-                       <td>'.$row['phone_number'].'</td>
-                       <td><a href="#" class="btn btn-primary">สถานะจัดส่ง</a></td>
-                       <td><a href="booking/'.$row['username'].'/'.$row['path_file'].'" class="btn btn-success">Booking file</a></td>
-                   </tr>';
-                   }
                   
+$result = mysqli_query($conn, $query);
+while($row = mysqli_fetch_assoc($result))
+{
+
+      
+   
+
+    echo '<tr>
+    <td>'.$row['username'].'</td>
+    <td>'.$row['firstname'].'</td>
+    <td>'.$row['lastname'].'</td>
+    <td>'.$row['company_name'].'</td>
+    <td>'.$row['address'].'</td>
+    <td>'.$row['phone_number'].'</td>
+    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">สถานะ</button></td>
+    <td><a href="booking/'.$row['username'].'/'.$row['path_file'].'" class="btn btn-success">Booking file</a>
+    <a href="#" class="btn btn-success" id="booking" value="'.$row['username'].'" value2="'.$row['booking_id'].'">+ Add booking</a>
+    </td>
+</tr>';
+
+
+
+echo '<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLongTitle">Status</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+<label>สถานะปัจจุบัน</label>
+<div calss="form-row">
+
+<div class="container1">
+<ul class="progressbar1">';
+
+
+if ($row['status']=="Receive form shipper") {
+echo'  <li  class="active"  >Receive form shipper</li>';
+echo'  <li>Booking Confirm</li>';
+echo'  <li >Department</li>';
+echo'  <li >Arrival</li>';
+} 
+if ($row['status']=="Booking Confirm") {
+echo'  <li  class="active"  >Receive form shipper</li>';
+echo'  <li class="active" >Booking Confirm</li>';
+echo'  <li >Department</li>';
+echo'  <li >Arrival</li>';
+} 
+if ($row['status']=="Department") {
+echo'  <li  class="active"  >Receive form shipper</li>';
+echo'  <li class="active" >Booking Confirm</li>';
+echo'  <li class="active">Department</li>';
+echo'  <li  >Arrival</li>';
+
+} 
+
+if ($row['status']=="Arrival") {
+echo'  <li  class="active"  >Receive form shipper</li>';
+echo'  <li class="active" >Booking Confirm</li>';
+echo'  <li class="active">Department</li>';
+echo'  <li class="active" >Department</li>';
+
+} 
+echo'    </ul>
+</div>
+
+
+</div>
+<br>
+<br>
+<form action="process/update_status.php" method="POST">
+<input name="username" value="'.$row['username'].'" hidden>
+<select name="status_update"class="form-control">
+<option value="'.$row['status'].'">'.$row['status'].'</option>
+<option value="Receive form shipper">Receive form shipper</option>
+<option value="Booking Confirm">Booking Confirm</option>
+<option value="Department">Department</option>
+<option value="Department">Department</option>
+</select>
+<br>
+<button class="btn btn-primary" type="submit">UPDATE</button>
+</form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+  </div>
+</div>
+</div>';
+} 
                   ?>
 
                                 </tbody>
@@ -213,43 +293,49 @@
 
 
 
-                <div class="card mb-3" id="booking_form">
+                <div class="card mb-3"  id="booking_form">
                     <div class="card-header">
                         <i class="fas fa-table"></i>
                         Add Booking</div>
                     <div class="card-body">
-                      <?php include('form_booking.php'); ?>
-                        </div>
+                        <form action="process/add_booking.php" method="POST" class="form-horizontal"
+                            style=" font-size: 14px;">
+
+
+                            <?php include('form_booking.php'); ?>
+                        </form>
                     </div>
-                  
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
-            <!-- /.container-fluid -->
 
-            <!-- Sticky Footer -->
-            <footer class="sticky-footer">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website 2019</span>
-                    </div>
-                </div>
-            </footer>
+
+
+
+
+
+
+
+
+
+
+
 
         </div>
-        <!-- /.content-wrapper -->
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Your Website 2019</span>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+    <!-- /.content-wrapper -->
 
     </div>
     <!-- /#wrapper -->
@@ -286,12 +372,23 @@
     <script>
     $(document).ready(function() {
         // $("#profile").hide();
+
         $("#booking_form").hide();
         $("#booking").click(function() {
             // $("#profile_form").hide();
             // $("#status_form").hide();
+            var username = $("#booking").attr("value");
+            var booking_id = $("#booking").attr("value2");
+            $("#username_get").val(username);
+            $("#booking_id_get").val(booking_id);
             $("#booking_form").fadeIn();
             $("#member_form").fadeOut();
+        });
+
+
+        $("#booking_menu").click(function() {
+            $("#member_form").fadeIn();
+            $("#booking_form").fadeOut();
         });
 
 

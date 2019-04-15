@@ -9,9 +9,9 @@ include("../connect.php");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-
+$username= $_POST['username'];//เก็บ username
 $ship_name= $_POST['ship_name'];
-$booking_no= $_POST['booking_no'];
+$booking_id= $_POST['booking_id'];
 
 $etd= $_POST['etd'];
 $port_discharge =  $_POST['port_discharge'];
@@ -51,8 +51,9 @@ $closing_date = $_POST['closing_date'];
 
 $no_of_containner =  $_POST['no_of_containner'];
 
-$sql = "INSERT INTO `booking_detail` (`booking_detail_id`, `booking_no`, `ship_name`, `post_of_load`, `etd`, `post_of_discharge`, `eta`, `post_deli`, `eta_2`, `feeder_vessel`, `feeder_voyage`, `mother_vessel`, `mother_voyage`, `quantity_volume`,`weight`,`quantity`,`load_at`, `transporter`, `load_date`, `transporter_tel`, `contact`, `shiping_contact`, `tel_contact`, `tel_shiping`, `closing_date`, `time`, `type`) 
-VALUES ('','$booking_no', '$ship_name', '$port_discharge', '$etd', '$port_discharge', '$eta', '$port_delivery', '$eta_2', '$feeder_vessel', '$feeder_voyage', '$mother_vessel', '$mother_voyage', '$quantity_volume','$weight','$quantity' , '$loading_at', '$transporter', '$loading_date', '$transporter_tel', '$contact', '$shiping_contact', '$contact_tel', '$shiping_tel', '$closing_date', '$time', '$type')
+
+$sql = "INSERT INTO `booking_detail` (`booking_detail_id`, `booking_id`, `ship_name`, `post_of_load`, `etd`, `post_of_discharge`, `eta`, `post_deli`, `eta_2`, `feeder_vessel`, `feeder_voyage`, `mother_vessel`, `mother_voyage`, `quantity_volume`,`weight`,`quantity`,`load_at`, `transporter`, `load_date`, `transporter_tel`, `contact`, `shiping_contact`, `tel_contact`, `tel_shiping`, `closing_date`, `time`, `type`,`username`) 
+VALUES ('','$booking_id', '$ship_name', '$port_discharge', '$etd', '$port_discharge', '$eta', '$port_delivery', '$eta_2', '$feeder_vessel', '$feeder_voyage', '$mother_vessel', '$mother_voyage', '$quantity_volume','$weight','$quantity' , '$loading_at', '$transporter', '$loading_date', '$transporter_tel', '$contact', '$shiping_contact', '$contact_tel', '$shiping_tel', '$closing_date', '$time', '$type','$username')
 ";
 
 if ($conn->query($sql) === TRUE) {

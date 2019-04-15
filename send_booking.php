@@ -57,7 +57,7 @@ $uploadPath = $currentDir . $uploadDirectory . basename($fileName);
 include('connect.php');
 $path_sql = "$fileName";
 
-    $sql = "INSERT INTO `booking_file`(`booking_id`, `path_file`, `username`) VALUES ('null','$path_sql','$username')";
+    $sql = "INSERT INTO `booking_file`(`booking_id`, `path_file`, `username`,`status`) VALUES ('null','$path_sql','$username','Receive form shipper')";
    
    if ($conn->query($sql) === TRUE) {
        echo '<script type="text/javascript">';
