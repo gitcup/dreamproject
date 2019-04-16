@@ -201,7 +201,7 @@ $row=mysqli_fetch_assoc($result);
                             <a class="list-group-item" href="#" id="profile">Profile</a>
                             <a class="list-group-item" href="#" id="booking">Booking</a>
                             <a class="list-group-item" href="#" id="status">Status</a>
-                            <a class="list-group-item" href="#" id="bill">Bill</a>
+                            <a class="list-group-item" href="#" id="bill">B/L</a>
                         </ul>
                     </div>
                 </div>
@@ -215,7 +215,7 @@ $row=mysqli_fetch_assoc($result);
                                 <li class="breadcrumb-item active" aria-current="page">Profile</li>
                                 <li class="breadcrumb-item"><a href="#">Booking</a></li>
                                 <li class="breadcrumb-item"><a href="#">Status</a></li>
-                                <li class="breadcrumb-item"><a href="#" id="bill">Bill</a></li>
+                                <li class="breadcrumb-item"><a href="#" id="bill">B/L</a></li>
 
                             </ol>
                         </div>
@@ -260,10 +260,45 @@ $row = mysqli_fetch_assoc($result);
 
                         <!-- ส่งไฟล์ให้ admin -->
                         <div id="bill_form" class="padding">
-                            <form>
+
+
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">file_name</th>
+                                        <!-- <th scope="col">Last</th> -->
+                                        <th scope="col">Download</th>
+                                    </tr>
+                                </thead>
+
+
+                                <?php
+                                    include('connect.php');
+                  $query_bill = "SELECT * FROM bill_file 
+                 WHERE username ='$username' ";
+
+                  
+$result_bill = mysqli_query($conn,  $query_bill);
+$row_bill = mysqli_fetch_assoc($result_bill );
+
+
+
+?>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td><?php echo  $row_bill['bill_path'] ?></td>
+                                        <td><a href="bill/<?php echo $row_bill['username']?>/<?php echo $row_bill['bill_path']?>"
+                                                class="btn btn-success">Download</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- <form>
                                 <label for="exampleFormControlFile1">ส่งใบข้อมูลให้ Admin</label>
                                 <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                            </form>
+                            </form> -->
                         </div>
 
 
@@ -284,7 +319,7 @@ if ($row['status']=="") {
 </form>';
 }
 
-if ($row['status']=="Receive form shipper") {
+if ($row['status']=="Receive form shipper" or $row['status']=="Booking Confirm" or  $row['status']=="Departure" or $row['status']=="Arrival" or $row['status']=="Payment" ) {
 
     
     $query = "SELECT * FROM booking_detail
@@ -364,8 +399,8 @@ $row = mysqli_fetch_assoc($result);
                         <div id="status_form" class="padding">
                             <label for="exampleFormControlFile1">Status</label>
 
-                           
-                                <?php
+
+                            <?php
     include('connect.php');
     $query = "SELECT * FROM booking_file 
    WHERE username ='$username' ";
@@ -375,93 +410,111 @@ $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
 
 if ($row['status']=="") {
-    echo '<div class="alert alert-warning" role="alert">
-    Status will show when you sending booking first !
-  </div>';
+    echo ' <div class="container1"><ul class="progressbar1">
+    <li>Wait For Admin </li>
+    <li>Booking Confirm</li>
+    <li>Departure</li>
+    <li>Arrival</li>
+    <li>Payment</li>
+</ul>';
 }
 
 
 if ($row['status']=="Receive form shipper") {
     echo ' <div class="container1"><ul class="progressbar1">
-    <li class="active">Receive form shipper</li>
+    <li class="active" >Receive form '.$row['receive_from'].' shipper</li>
     <li>Booking Confirm</li>
-    <li>Department</li>
+    <li>Departure</li>
     <li>Arrival</li>
+    <li>Payment</li>
 </ul>';
 }
 if ($row['status']=="Booking Confirm") {
     echo '   <div class="container1"><ul class="progressbar1">
-    <li class="active">Receive form shipper</li>
+    <li class="active">Receive form '.$row['receive_from'].'shipper</li>
     <li  class="active">Booking Confirm</li>
-    <li>Department</li>
+    <li>Departure</li>
     <li>Arrival</li>
+    <li>Payment</li>
 </ul>';
 }
-if ($row['status']=="Department") {
+if ($row['status']=="Departure") {
     echo '  <div class="container1"> <ul class="progressbar1">
-    <li class="active">Receive form shipper</li>
+    <li class="active">Receive form '.$row['receive_from'].'shipper</li>
     <li  class="active">Booking Confirm</li>
-    <li class="active">Department</li>
+    <li class="active">Departure</li>
     <li>Arrival</li>
+    <li>Payment</li>
 </ul>';
 }
 if ($row['status']=="Arrival") {
     echo '  <div class="container1"> <ul class="progressbar1">
-    <li class="active">Receive form shipper</li>
+    <li class="active">Receive form '.$row['receive_from'].' shipper</li>
     <li  class="active">Booking Confirm</li>
-    <li  class="active">Department</li>
+    <li  class="active">Departure</li>
     <li  class="active">Arrival</li>
+    <li>Payment</li>
 </ul>';
 }
+if ($row['status']=="Payment") {
+    echo '  <div class="container1"> <ul class="progressbar1">
+    <li class="active">Receive form'.$row['receive_from'].' shipper</li>
+    <li  class="active">Booking Confirm</li>
+    <li  class="active">Departure</li>
+    <li  class="active">Arrival</li>
+    <li class="active">Payment</li>
+</ul>';
+
+}
 ?>
-                            </div>
                         </div>
-
-               
-
+                    </div>
 
 
 
-                <script>
-                $(document).ready(function() {
-                    // $("#profile").hide();
-                    $("#booking_form").hide();
-                    $("#status_form").hide();
-                    $("#bill_form").hide();
-                    $("#bill").click(function() {
+
+
+
+                    <script>
+                    $(document).ready(function() {
+                        // $("#profile").hide();
                         $("#booking_form").hide();
-                        $("#profile_form").hide();
                         $("#status_form").hide();
-                        $("#bill_form").fadeIn();
-                    });
-                    $("#profile").click(function() {
-                        $("#booking_form").hide();
                         $("#bill_form").hide();
-                        $("#status_form").hide();
-                        $("#profile_form").fadeIn();
+                        $("#bill").click(function() {
+                            $("#booking_form").hide();
+                            $("#profile_form").hide();
+                            $("#status_form").hide();
+                            $("#bill_form").fadeIn();
+                        });
+                        $("#profile").click(function() {
+                            $("#booking_form").hide();
+                            $("#bill_form").hide();
+                            $("#status_form").hide();
+                            $("#profile_form").fadeIn();
+                        });
+                        $("#status").click(function() {
+                            $("#booking_form").hide();
+                            $("#profile_form").hide();
+                            $("#bill_form").hide();
+                            $("#status_form").fadeIn();
+                        });
+
+                        $("#booking").click(function() {
+                            $("#profile_form").hide();
+                            $("#bill_form").hide();
+                            $("#status_form").hide();
+                            $("#booking_form").fadeIn();
+                        });
+
+
                     });
-                    $("#status").click(function() {
-                        $("#booking_form").hide();
-                        $("#profile_form").hide();
-                        $("#bill_form").hide();
-                        $("#status_form").fadeIn();
-                    });
-
-                    $("#booking").click(function() {
-                        $("#profile_form").hide();
-                        $("#bill_form").hide();
-                        $("#status_form").hide();
-                        $("#booking_form").fadeIn();
-                    });
-
-
-                });
-                </script>
+                    </script>
 
 
 
+                </div>
             </div>
-        </div>
         </div>
         </div>
 

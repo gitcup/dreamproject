@@ -214,8 +214,26 @@
                 Price: <input type="text" name="Price" value="" id="Price">
                 <p class="help-block text-danger"></p>
             </div>
+            <!-- กดแล้วเด้งข้อความ ให้ติดต่อมา -->
+            <a href="#contact" class="js-scroll-trigger btn btn-primary" id="submit_message">Submit</a>
 
         </div>
+
+
+
+        <script>
+        $(document).ready(function() {
+
+            $("#message").hide();
+            $("#submit_message").click(function() {
+                //   console.log('test');
+                $("#message").fadeIn( "slow" );
+                $("#message").fadeOut( 4000 );
+                // $("#booking_form").fadeOut();
+            });
+
+        });
+        </script>
         <div cbotron">
 
 
@@ -238,14 +256,21 @@
 
         <!-- Contact Section -->
         <section id="contact">
+
             <div class="container">
+
                 <h2 class="text-center text-uppercase text-secondary mb-0">Contact </h2>
                 <hr class="star-dark mb-5">
+
+                <div class="alert alert-primary" role="alert" id="message">
+                    If you are interested, please contact us.
+
+                </div>
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <form action="process/add_contact.php" method="POST" >
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     <label>Name</label>
