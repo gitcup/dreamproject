@@ -280,7 +280,8 @@ $row = mysqli_fetch_assoc($result);
                                 <?php
                                     include('connect.php');
                   $query_bill = "SELECT * FROM bill_file 
-                 WHERE username ='$username' ";
+                  INNER JOIN  invoice_file ON bill_file.username =invoice_file.username
+                 WHERE bill_file.username ='$username' ";
 
                   
 $result_bill = mysqli_query($conn,  $query_bill);
@@ -290,12 +291,31 @@ $row_bill = mysqli_fetch_assoc($result_bill );
 
 ?>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td><?php echo  $row_bill['bill_path'] ?></td>
-                                        <td><a href="bill/<?php echo $row_bill['username']?>/<?php echo $row_bill['bill_path']?>"
-                                                class="btn btn-success">Download</a></td>
-                                    </tr>
+
+<?php
+
+if ($row_bill['status']=="" ) {
+    
+   echo '<tr><td colspan="3"><div class="alert alert-warning" role="alert">
+  Wait for admin
+ </div></td></tr>';
+} else {
+    echo '     <tr>
+    <th scope="row">1</th>
+    <td>'.$row_bill['bill_path'].'</td>
+    <td><a href="bill/'.$row_bill['username'].'/'.$row_bill['bill_path'].'"
+            class="btn btn-success">Download</a></td>
+</tr>';
+}
+
+
+?>
+
+                               
+
+
+
+
                                 </tbody>
                             </table>
                             <!-- <form>
