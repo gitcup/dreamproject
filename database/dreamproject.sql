@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2019 at 12:41 PM
+-- Generation Time: Apr 17, 2019 at 03:49 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.27
 
@@ -34,14 +34,6 @@ CREATE TABLE `bill_file` (
   `username` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `bill_file`
---
-
-INSERT INTO `bill_file` (`bill_id`, `bill_path`, `username`) VALUES
-(3, 'นามบัตร2 หลัง.docx', 'user'),
-(4, 'นามบัตร1 เดียร์.docx', 'user');
-
 -- --------------------------------------------------------
 
 --
@@ -50,7 +42,7 @@ INSERT INTO `bill_file` (`bill_id`, `bill_path`, `username`) VALUES
 
 CREATE TABLE `booking_detail` (
   `booking_detail_id` int(5) NOT NULL,
-  `booking_id` int(5) NOT NULL,
+  `invoice_id` int(5) NOT NULL,
   `ship_name` varchar(150) NOT NULL,
   `post_of_load` varchar(150) NOT NULL,
   `etd` varchar(150) NOT NULL,
@@ -83,29 +75,10 @@ CREATE TABLE `booking_detail` (
 -- Dumping data for table `booking_detail`
 --
 
-INSERT INTO `booking_detail` (`booking_detail_id`, `booking_id`, `ship_name`, `post_of_load`, `etd`, `post_of_discharge`, `eta`, `post_deli`, `eta_2`, `feeder_vessel`, `feeder_voyage`, `mother_vessel`, `mother_voyage`, `quantity_volume`, `weight`, `quantity`, `load_at`, `transporter`, `load_date`, `transporter_tel`, `contact`, `shiping_contact`, `tel_contact`, `tel_shiping`, `closing_date`, `time`, `type`, `username`) VALUES
-(5, 6, 'RAVEE INTER SUPPLY', 'BANGKOK,THAILAND', '13 SETEMBER 2018 ', 'BANGKOK,THAILAND', '17 SETEMBER 2018 ', '', '', 'WANHAI 171', '156S', '', '', '1 CBM', ' KG', ' BOX', 'WAREHOUSE 14 GATE 13', '', '13 SETEMBER 2018 ', '', 'MR.KOGI', '', '(+65) 6276 6116', '', '13 SETEMBER 2018 ', '12:00 AM', '4 WHEELS', 'user');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `booking_file`
---
-
-CREATE TABLE `booking_file` (
-  `booking_id` int(3) NOT NULL COMMENT 'คีย์หลัก',
-  `path_file` varchar(150) NOT NULL COMMENT 'ที่เก็บไฟล์',
-  `username` varchar(150) NOT NULL COMMENT 'คีย์นอก username',
-  `status` varchar(150) NOT NULL,
-  `receive_from` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `booking_file`
---
-
-INSERT INTO `booking_file` (`booking_id`, `path_file`, `username`, `status`, `receive_from`) VALUES
-(11, 'นามบัตร2 หลัง.docx', 'user', '', '');
+INSERT INTO `booking_detail` (`booking_detail_id`, `invoice_id`, `ship_name`, `post_of_load`, `etd`, `post_of_discharge`, `eta`, `post_deli`, `eta_2`, `feeder_vessel`, `feeder_voyage`, `mother_vessel`, `mother_voyage`, `quantity_volume`, `weight`, `quantity`, `load_at`, `transporter`, `load_date`, `transporter_tel`, `contact`, `shiping_contact`, `tel_contact`, `tel_shiping`, `closing_date`, `time`, `type`, `username`) VALUES
+(5, 6, 'RAVEE INTER SUPPLY', 'BANGKOK,THAILAND', '13 SETEMBER 2018 ', 'BANGKOK,THAILAND', '17 SETEMBER 2018 ', '', '', 'WANHAI 171', '156S', '', '', '1 CBM', ' KG', ' BOX', 'WAREHOUSE 14 GATE 13', '', '13 SETEMBER 2018 ', '', 'MR.KOGI', '', '(+65) 6276 6116', '', '13 SETEMBER 2018 ', '12:00 AM', '4 WHEELS', 'user'),
+(6, 0, '', '', '', '', '', '', '', '', '', '', '', ' CBM', ' KG', ' BOX', '', '', '', '', '', '', '', '', '', '', '4 WHEELS', ''),
+(7, 13, '', '', '', '', '', '', '', '', '', '', '', ' CBM', ' KG', ' BOX', '', '', '', '', '', '', '', '', '', '', '4 WHEELS', '');
 
 -- --------------------------------------------------------
 
@@ -586,6 +559,20 @@ INSERT INTO `country_truck` (`ID`, `Destination`, `4 wheels`, `6 wheels`, `20'ft
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoice_file`
+--
+
+CREATE TABLE `invoice_file` (
+  `invoice_id` int(3) NOT NULL COMMENT 'คีย์หลัก',
+  `path_file` varchar(150) NOT NULL COMMENT 'ที่เก็บไฟล์',
+  `username` varchar(150) NOT NULL COMMENT 'คีย์นอก username',
+  `status` varchar(150) NOT NULL,
+  `receive_from` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `member`
 --
 
@@ -627,16 +614,16 @@ ALTER TABLE `booking_detail`
   ADD PRIMARY KEY (`booking_detail_id`);
 
 --
--- Indexes for table `booking_file`
---
-ALTER TABLE `booking_file`
-  ADD PRIMARY KEY (`booking_id`);
-
---
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`contact_id`);
+
+--
+-- Indexes for table `invoice_file`
+--
+ALTER TABLE `invoice_file`
+  ADD PRIMARY KEY (`invoice_id`);
 
 --
 -- Indexes for table `member`
@@ -658,19 +645,19 @@ ALTER TABLE `bill_file`
 -- AUTO_INCREMENT for table `booking_detail`
 --
 ALTER TABLE `booking_detail`
-  MODIFY `booking_detail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `booking_file`
---
-ALTER TABLE `booking_file`
-  MODIFY `booking_id` int(3) NOT NULL AUTO_INCREMENT COMMENT 'คีย์หลัก', AUTO_INCREMENT=12;
+  MODIFY `booking_detail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
   MODIFY `contact_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `invoice_file`
+--
+ALTER TABLE `invoice_file`
+  MODIFY `invoice_id` int(3) NOT NULL AUTO_INCREMENT COMMENT 'คีย์หลัก', AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `member`
