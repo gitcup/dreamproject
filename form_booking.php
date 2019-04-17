@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-3">
                 <label class="col-md-4 control-label" for="ship_name">Booking NO.</label>
-                <input name="booking_id" type="text" placeholder="" id="booking_id_get" class="form-control input-md" readonly>
+                <input name="invoice_id" type="text" placeholder="" id="booking_id_get" class="form-control input-md" readonly>
 
             </div>
 

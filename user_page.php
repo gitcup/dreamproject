@@ -199,9 +199,11 @@ $row=mysqli_fetch_assoc($result);
                         </div>
                         <ul class="list-group list-group-flush">
                             <a class="list-group-item" href="#" id="profile">Profile</a>
+                            <a class="list-group-item" href="#" id="invoice">Invoice</a>
                             <a class="list-group-item" href="#" id="booking">Booking</a>
                             <a class="list-group-item" href="#" id="status">Status</a>
                             <a class="list-group-item" href="#" id="bill">B/L</a>
+
                         </ul>
                     </div>
                 </div>
@@ -213,6 +215,7 @@ $row=mysqli_fetch_assoc($result);
                         <div class="card-header">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                                <li class="breadcrumb-item"><a href="#">Invoice</a></li>
                                 <li class="breadcrumb-item"><a href="#">Booking</a></li>
                                 <li class="breadcrumb-item"><a href="#">Status</a></li>
                                 <li class="breadcrumb-item"><a href="#" id="bill">B/L</a></li>
@@ -248,7 +251,7 @@ $row=mysqli_fetch_assoc($result);
 
                         <?php
                                     include('connect.php');
-                  $query = "SELECT * FROM booking_file 
+                  $query = "SELECT * FROM invoice_file 
                  WHERE username ='$username' ";
 
                   
@@ -303,21 +306,18 @@ $row_bill = mysqli_fetch_assoc($result_bill );
 
 
 
-                        <!-- ส่งไฟล์ให้ admin -->
+                        <!-- รอดู Booking -->
                         <div id="booking_form" class="padding">
 
                             <?php
+
 if ($row['status']=="") {
     echo ' 
-    <form action="send_booking.php?username='.$username.'" method="POST"
-        enctype="multipart/form-data">
-        <label>ส่งใบ Booking ให้ Admin</label>
-        <input type="file" class="form-control-file" name="booking">
-        <br>
-        <button type="submit" class="btn btn-primary">ส่งไฟล์</button>
-</div>
-</form>';
+    <div class="alert alert-warning" role="alert">
+  Wait for admin 
+</div>';
 }
+
 
 if ($row['status']=="Receive form shipper" or $row['status']=="Booking Confirm" or  $row['status']=="Departure" or $row['status']=="Arrival" or $row['status']=="Payment" ) {
 
@@ -402,7 +402,7 @@ $row = mysqli_fetch_assoc($result);
 
                             <?php
     include('connect.php');
-    $query = "SELECT * FROM booking_file 
+    $query = "SELECT * FROM invoice_file 
    WHERE username ='$username' ";
 
     
@@ -470,51 +470,92 @@ if ($row['status']=="Payment") {
                         </div>
                     </div>
 
+                    <div id="invoice_form" class="padding">
 
-
-
-
-
-                    <script>
-                    $(document).ready(function() {
-                        // $("#profile").hide();
-                        $("#booking_form").hide();
-                        $("#status_form").hide();
-                        $("#bill_form").hide();
-                        $("#bill").click(function() {
-                            $("#booking_form").hide();
-                            $("#profile_form").hide();
-                            $("#status_form").hide();
-                            $("#bill_form").fadeIn();
-                        });
-                        $("#profile").click(function() {
-                            $("#booking_form").hide();
-                            $("#bill_form").hide();
-                            $("#status_form").hide();
-                            $("#profile_form").fadeIn();
-                        });
-                        $("#status").click(function() {
-                            $("#booking_form").hide();
-                            $("#profile_form").hide();
-                            $("#bill_form").hide();
-                            $("#status_form").fadeIn();
-                        });
-
-                        $("#booking").click(function() {
-                            $("#profile_form").hide();
-                            $("#bill_form").hide();
-                            $("#status_form").hide();
-                            $("#booking_form").fadeIn();
-                        });
-
-
-                    });
-                    </script>
-
-
-
+                        <?php 
+                
+                if ($row['status']=="Receive form shipper") {
+                   echo '<div class="alert alert-success" role="alert">
+                   Invoice has been sending <br>
+                   wait for admin confirm booking
+                 </div>';
+                } else {
+                   echo' <form action="send_invoice.php?username='.$username.'?>" method="POST"
+                   enctype="multipart/form-data">
+                   <label>Send invoice to admin</label>
+                   <input type="file" class="form-control-file" name="invoice">
+                   <br>
+                   <button type="submit" class="btn btn-primary">ส่งไฟล์</button>
+           </div>
+           </form>';
+                }
+                
+                
+                
+                ?>
+                       
                 </div>
+
+
+
+
+
+
+
+
+                <script>
+                $(document).ready(function() {
+                    // $("#profile").hide();
+                    $("#invoice_form").hide();
+                    $("#booking_form").hide();
+                    $("#status_form").hide();
+                    $("#bill_form").hide();
+                    $("#bill").click(function() {
+                        $("#invoice_form").hide();
+                        $("#booking_form").hide();
+                        $("#profile_form").hide();
+                        $("#status_form").hide();
+                        $("#bill_form").fadeIn();
+                    });
+                    $("#profile").click(function() {
+                        $("#invoice_form").hide();
+                        $("#booking_form").hide();
+                        $("#bill_form").hide();
+                        $("#status_form").hide();
+                        $("#profile_form").fadeIn();
+                    });
+                    $("#status").click(function() {
+                        $("#invoice_form").hide();
+                        $("#booking_form").hide();
+                        $("#profile_form").hide();
+                        $("#bill_form").hide();
+                        $("#status_form").fadeIn();
+                    });
+
+                    $("#booking").click(function() {
+                        $("#invoice_form").hide();
+                        $("#profile_form").hide();
+                        $("#bill_form").hide();
+                        $("#status_form").hide();
+                        $("#booking_form").fadeIn();
+                    });
+
+                    $("#invoice").click(function() {
+                        $("#booking_form").hide();
+                        $("#profile_form").hide();
+                        $("#bill_form").hide();
+                        $("#status_form").hide();
+                        $("#invoice_form").fadeIn();
+                    });
+
+
+                });
+                </script>
+
+
+
             </div>
+        </div>
         </div>
         </div>
 

@@ -98,7 +98,7 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="admin_page.php" >
+                <a class="nav-link" href="admin_page.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Admin page</span>
                 </a>
@@ -109,7 +109,7 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>สมาชิก</span>
                 </a> -->
-                <!-- <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <!-- <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Login Screens:</h6>
           <a class="dropdown-item" href="login.html">Login</a>
           <a class="dropdown-item" href="register.html">Register</a>
@@ -161,7 +161,9 @@
                                         <th>ที่อยู่</th>
                                         <th>เบอร์โทร</th>
                                         <th>สถานะ</th>
-                                        <th>invoice</th>
+                                        <th>Invoice</th>
+                                        <th>Booking</th>
+                                        <th>B/l</th>
                                         <th>action</th>
                                     </tr>
                                 </thead>
@@ -174,7 +176,9 @@
                                         <th>ที่อยู่</th>
                                         <th>เบอร์โทร</th>
                                         <th>สถานะ</th>
-                                        <th>invoice</th>
+                                        <th>Invoice</th>
+                                        <th>Booking</th>
+                                        <th>B/l</th>
                                         <th>action</th>
                                     </tr>
                                 </tfoot>
@@ -183,7 +187,7 @@
                                     <?php
                                     include('connect.php');
                   $query = "SELECT * FROM member 
-                  INNER JOIN booking_file ON member.username=booking_file.username
+                  INNER JOIN invoice_file ON member.username=invoice_file.username
                  
                    ";
 
@@ -203,12 +207,13 @@ while($row = mysqli_fetch_assoc($result))
     <td>'.$row['address'].'</td>
     <td>'.$row['phone_number'].'</td>
     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg'.$row['username'].'">สถานะ</button></td>
-    <td><a href="booking/'.$row['username'].'/'.$row['path_file'].'" class="btn btn-success">Booking file</a>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal'.$row['username'].'" >+ Add Booking</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billModal">
-  + Add Bill
+    <td><a href="invoice/'.$row['username'].'/'.$row['path_file'].'" class="btn btn-success">Invoice file</a>
+   </td>
+<td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal'.$row['username'].'" >+ Add Booking</button></td>
+<td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billModal">
++ Add Bill
 </button></td>
-<td><a href="process/delete_booking.php?booking_id='.$row['booking_id'].'" class="btn btn-danger"  >Delete</a></td>
+<td><a href="process/delete_booking.php?booking_id='.$row['invoice_id'].'" class="btn btn-danger"  >Delete</a></td>
 </tr>';
 
 
@@ -245,8 +250,8 @@ echo'<!-- Modal Bill -->
               </div>
               <div class="col-md-4">
                   <label class="col-md-6 control-label" for="ship_name">Booking NO.</label>
-                  <input name="booking_id" type="text" placeholder="" id="booking_id_get" class="form-control input-md"
-                      value="'.$row['booking_id'].'" readonly>
+                  <input name="invoice_id" type="text" placeholder=""  class="form-control input-md"
+                      value="'.$row['invoice_id'].'" readonly>
   
               </div>
   
@@ -474,21 +479,21 @@ echo'<br>
 
 
 
-        </div>
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright © Your Website 2019</span>
-                </div>
             </div>
-        </footer>
+            <!-- /.container-fluid -->
+
+            <!-- Sticky Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Your Website 2019</span>
+                    </div>
+                </div>
+            </footer>
 
 
-    </div>
-    <!-- /.content-wrapper -->
+        </div>
+        <!-- /.content-wrapper -->
 
     </div>
     <!-- /#wrapper -->
@@ -539,23 +544,23 @@ echo'<br>
         //     $("#member_form").fadeOut();
         // });
 
-  $("#booking_menu").click(function() {
+        $("#booking_menu").click(function() {
             $("#member_form").fadeIn();
             $("#booking_form").fadeOut();
         });
-      
+
 
         $("#list_country_truck").hide();
         $("#show_country").click(function() {
             $("#list_country_truck").fadeIn();
-           
+
         });
 
 
     });
     </script>
 
-<!-- <script>
+    <!-- <script>
 function myFunction() {
   confirm("Are you sure you want to delete this?");
   if(confirm('Do you want to visit : https://www.thaicreate.com')==true)

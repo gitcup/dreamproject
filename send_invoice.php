@@ -5,8 +5,8 @@ $username= $_GET['username'];
 
 $currentDir = getcwd();
 
-mkdir("booking/$username/");
-$uploadDirectory = "/booking/$username/";
+mkdir("invoice/$username/");
+$uploadDirectory = "/invoice/$username/";
 
 
 
@@ -14,10 +14,10 @@ $errors = []; // Store all foreseen and unforseen errors here
 
 $fileExtensions = ["pdf", "doc", "docx"]; // Get all the file extensions
 
-$fileName = $_FILES['booking']['name'];
-$fileSize = $_FILES['booking']['size'];
-$fileTmpName  = $_FILES['booking']['tmp_name'];
-$fileType = $_FILES['booking']['type'];
+$fileName = $_FILES['invoice']['name'];
+$fileSize = $_FILES['invoice']['size'];
+$fileTmpName  = $_FILES['invoice']['tmp_name'];
+$fileType = $_FILES['invoice']['type'];
 
 
 $tmp = explode('.', $fileName);
@@ -57,12 +57,12 @@ $uploadPath = $currentDir . $uploadDirectory . basename($fileName);
 include('connect.php');
 $path_sql = "$fileName";
 
-    $sql = "INSERT INTO `booking_file`(`booking_id`, `path_file`, `username`,`status`,`receive_from`) VALUES ('null','$path_sql','$username','','')";
+    $sql = "INSERT INTO `invoice_file`(`invoice_id`, `path_file`, `username`,`status`,`receive_from`) VALUES ('null','$path_sql','$username','Receive form shipper','')";
    
    if ($conn->query($sql) === TRUE) {
        echo '<script type="text/javascript">';
        echo 'setTimeout(function () 
-       { swal("Sending Booking Complete !","wait for admin ","success");}, 1000);</script>';
+       { swal("Sending invoice Complete !","wait for admin ","success");}, 1000);</script>';
       
    } else {
        echo "Error: " . $sql . "<br>" . $conn->error;

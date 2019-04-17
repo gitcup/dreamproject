@@ -14,7 +14,7 @@ $booking_id= $_GET['booking_id'];
 
 
 
-$sql = "DELETE FROM `booking_file` WHERE booking_id='$booking_id'";
+$sql = "DELETE FROM `invoice_file` WHERE invoice_id='$booking_id'";
 
 if ($conn->query($sql) === TRUE) {
 
