@@ -500,7 +500,7 @@ if ($row['status']=="Payment") {
                    wait for admin confirm booking
                  </div>';
                 } else {
-                   echo' <form action="send_invoice.php?username='.$username.'?>" method="POST"
+                   echo' <form action="send_invoice.php?username='.$username.'" method="POST"
                    enctype="multipart/form-data">
                    <label>Send invoice to admin</label>
                    <input type="file" class="form-control-file" name="invoice">
