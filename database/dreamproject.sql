@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2019 at 05:07 PM
+-- Generation Time: Apr 17, 2019 at 12:41 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.27
 
@@ -39,7 +39,8 @@ CREATE TABLE `bill_file` (
 --
 
 INSERT INTO `bill_file` (`bill_id`, `bill_path`, `username`) VALUES
-(3, 'นามบัตร2 หลัง.docx', 'user');
+(3, 'นามบัตร2 หลัง.docx', 'user'),
+(4, 'นามบัตร1 เดียร์.docx', 'user');
 
 -- --------------------------------------------------------
 
@@ -104,7 +105,7 @@ CREATE TABLE `booking_file` (
 --
 
 INSERT INTO `booking_file` (`booking_id`, `path_file`, `username`, `status`, `receive_from`) VALUES
-(10, 'เอกสารประกอบ.docx', 'user', 'Receive form shipper', 'Chiang Mai');
+(11, 'นามบัตร2 หลัง.docx', 'user', '', '');
 
 -- --------------------------------------------------------
 
@@ -651,7 +652,7 @@ ALTER TABLE `member`
 -- AUTO_INCREMENT for table `bill_file`
 --
 ALTER TABLE `bill_file`
-  MODIFY `bill_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `bill_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `booking_detail`
@@ -663,7 +664,7 @@ ALTER TABLE `booking_detail`
 -- AUTO_INCREMENT for table `booking_file`
 --
 ALTER TABLE `booking_file`
-  MODIFY `booking_id` int(3) NOT NULL AUTO_INCREMENT COMMENT 'คีย์หลัก', AUTO_INCREMENT=11;
+  MODIFY `booking_id` int(3) NOT NULL AUTO_INCREMENT COMMENT 'คีย์หลัก', AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `contact`
